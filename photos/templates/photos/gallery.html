@@ -1,0 +1,59 @@
+{% extends 'photos/base.html' %}
+
+
+{% block title %}Gallery{% endblock %}
+
+
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header" style="text-align: center">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a style="text-decoration: none; color: black" href="{% url 'gallery' %}">All</a></li>
+
+                        {% for category in categories %}
+                            <li class="list-group-item"><a style="text-decoration: none; color: black" href="{% url 'gallery' %}?category={{ category.name }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                        <a class="btn btn-outline-success btn-block m-2" href="{% url 'add' %}">Add Photo</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    {% for photo in gallery %}
+                        <div class="col-md-4" style="display: flex">
+                            <div class="card my-2">
+                                <img src="{{ photo.image.url }}"
+                                     class="card-img-top" style="object-fit: cover;height: 300px;width: 300px" alt="...">
+                                <div class="card-body ">
+                                    <h5 class="card-title">{{ photo.title }}</h5>
+                                    <div class="card-text">
+                                        <small>Category: {{ photo.category.name }}</small>
+                                    </div>
+                                    <br>
+                                    <a href="{% url 'view' photo.id %}" class="btn btn-outline-success btn-sm">Open
+                                        Image</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <h3>No Photos ... </h3>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

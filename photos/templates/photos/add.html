@@ -1,0 +1,68 @@
+{% extends 'photos/base.html' %}
+
+
+{% block title %}Add Photo{% endblock %}
+
+
+
+{% block body %}
+    <div class="m-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <a href="{% url 'gallery' %}" class="btn btn-outline-dark">Go Back</a>
+                    <form method='post' action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input required type="text" class="form-control" id="title" name="title">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="category">Category</label>
+                            <select required id="category" class="form-select" aria-label="Default select example"
+                                    name="category">
+                                <option value="none" selected>Select a category</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image">Image</label>
+                            <br>
+                            <input required id="image" name="image" type="file" accept="image/jpeg">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="new_category" class="form-label">Create a new category</label>
+                            <input type="text" class="form-control" id="new_category" name="new_category">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" name="description" class="form-control" id="description">
+                        </div>
+
+
+                        <button class="btn btn-outline-success" type="submit">Add Photo</button>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
