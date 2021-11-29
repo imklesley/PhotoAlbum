@@ -26,9 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('photos.urls'))
 ]
-
-#Para encontrar os arquivos de mídia
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-#Para encontrar arquivos como js, css etc
+# Para encontrar arquivos como js, css etc
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Para encontrar os arquivos de mídia
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

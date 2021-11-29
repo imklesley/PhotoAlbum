@@ -122,11 +122,11 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+# É interessante colocar os arquivos estáticos em algum servidor quando estiver em produção, esse caminho aqui serve pra fazer isso com facilidade... após usar o comando collectstatics vai colocar todos os arquivos statics numa única pasta desde js,css, html file à imagens
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Fala aonde upar o conteúdo
 MEDIA_ROOT = BASE_DIR / 'static/images'
-
-# É interessante colocar os arquivos estáticos em alguma servidor quando estiver em produção, esse caminho aqui serve pra fazer isso com facilidade... após usar o comando collectstatics vai colocar todos os arquivos statics numa única pasta desde js,css, html file à imagens
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

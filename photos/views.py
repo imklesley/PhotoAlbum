@@ -1,8 +1,6 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from photos.forms import AddPhoto
 from photos.models import Photo, Category
 
 
@@ -10,13 +8,15 @@ def gallery(request):
     context = {}
 
     category = request.GET.get('category')
-    if category == None:
+
+    if category is None:
         context['gallery'] = Photo.objects.all()
     else:
-        #Para acessar um atributo de um atributo(no caso de um atributo que é uma chave estrangeira e possui sua própria
+        # Para acessar um atributo de um atributo(no caso de um atributo que é uma chave estrangeira e possui sua própria
         # table, basta usar o nome do atributo__nomeAtributoDaTableEstrangeira)
         context['gallery'] = Photo.objects.filter(category__name=category)
-        print(context['gallery'])
+        # print(context['gallery'])
+
     context['categories'] = Category.objects.all()
 
     return render(request, 'photos/gallery.html', context)
@@ -29,9 +29,11 @@ def add_photo(request):
         data = request.POST
         image = request.FILES.get('image')
 
-        print(data)
-        print(image)
+        # print(data)
+        # print(image)
 
+
+        # Procura, cria ou nula a categoria para sua criação
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
         elif data['new_category'] != '':
@@ -55,9 +57,6 @@ def add_photo(request):
         return render(request, 'photos/add.html', context)
 
 
-def view_photo(request, id: int):
-    context = {}
-
-    context['photo'] = Photo.objects.get(id=id)
-
+def view_photo(request, pk: int):
+    context = {'photo': Photo.objects.get(id=pk)}
     return render(request, 'photos/photo.html', context)
